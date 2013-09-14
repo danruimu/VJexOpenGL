@@ -3,26 +3,25 @@
 
 #include <windows.h> 
 #include <gl/glut.h>
-#include "scene.h";
-
-scene scen;
+#include "Scene.h"
 
 //Delete console
 #pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"")
 
+Scene scene;
+
 //OpenGL initializations
 void init(void)
 {
-	glClearColor(0.5, 0.0, 0.0, 0.0);
+	glClearColor(0.0f, 0.5f, 0.0f, 0.0f);	//background color
 }
 
 //Rendering
 void render(void)   
 {
-	glLoadIdentity();
-
 	glClear(GL_COLOR_BUFFER_BIT);
-	scen.render();
+	glLoadIdentity();
+	scene.render();
 
     glutSwapBuffers();					//Swap makes rendering visible
 }
