@@ -6,7 +6,7 @@ Exercises
 
 1. Window                 - DONE
 2. Primitives             - DONE
-3. Color                  -
+3. Color                  - DONE
 4. Push & Pop             -
 5. Projection             -
 6. Display Lists          -
