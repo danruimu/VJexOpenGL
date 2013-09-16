@@ -7,7 +7,7 @@ Exercises
 1. Window                 - DONE
 2. Primitives             - DONE
 3. Color                  - DONE
-4. Push & Pop             -
+4. Push & Pop             - DONE
 5. Projection             -
 6. Display Lists          -
 7. Modes                  -
