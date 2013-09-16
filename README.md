@@ -4,14 +4,14 @@ VJexOpenGL
 Exercises
 ----------
 
-# Window
-# Primitives
-# Color
-# Push & Pop
-# Projection
-# Display Lists
-# Modes
-# Z-Buffer + Z-Culling
-# Ilumination
-# Textures
-# Text
+1. Window                 - DONE
+2. Primitives             - DONE
+3. Color                  -
+4. Push & Pop             -
+5. Projection             -
+6. Display Lists          -
+7. Modes                  -
+8. Z-Buffer + Z-Culling   -
+9. Ilumination            -
+10. Textures              -
+11. Text                  -
