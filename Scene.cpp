@@ -73,4 +73,13 @@ void Scene::render(void)
 		glVertex3f(2.0f, 1.0f, 0.0f);
 	glEnd();
 
+	//1 yellow square
+	glBegin(GL_LINES);
+		glColor3f(1.0f, 1.0f, 0.0f);
+		glVertex3f(-2.0f, -3.5f, 0.0f);
+		glVertex3f(4.0f, -3.5f, 0.0f);
+		glVertex3f(4.0f, 3.5f, 0.0f);
+		glVertex3f(-2.0f, 3.5f, 0.0f);
+		glVertex3f(-2.0f, -3.5f, 0.0f);
+	glEnd();
 }
