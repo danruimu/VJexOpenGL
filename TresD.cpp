@@ -18,8 +18,10 @@ void init(void)
 {
 	persp = true;
 	zbuf = false;
-	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);	//background color
+	ilu = false;
+	glClearColor(0.5f, 0.0f, 0.0f, 0.0f);	//background color
 	scene.buildCube();
+	scene.buildSvastic();
 }
 
 //Rendering
@@ -87,6 +89,32 @@ void special_keys(int a_keys, int x, int y)
 								glDisable(GL_DEPTH_TEST);
 								glDisable(GL_CULL_FACE);
 							}
+							break;
+
+		case GLUT_KEY_F7:	ilu=(!ilu);
+							if(ilu)
+							{
+								float specular[] = {1.0,1.0,1.0,1.0};
+								float position[]  = {1.0,1.0,1.0,0.0};
+								
+								glShadeModel(GL_SMOOTH);
+								glEnable(GL_COLOR_MATERIAL);
+								glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR,specular);
+								glMaterialf(GL_FRONT_AND_BACK,GL_SHININESS,20.0);
+
+								glEnable(GL_LIGHTING);
+								glEnable(GL_LIGHT0);
+								glLightfv(GL_LIGHT0,GL_SPECULAR,specular);
+								glLightfv(GL_LIGHT0,GL_POSITION,position);
+							}
+							else
+							{
+								glShadeModel(GL_FLAT);
+								glDisable(GL_COLOR_MATERIAL);
+								glDisable(GL_LIGHTING);
+								glDisable(GL_LIGHT0);
+							}
+							break;
 	}
 }
 
