@@ -9,10 +9,12 @@
 #pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"")
 
 Scene scene;
+bool persp;
 
 //OpenGL initializations
 void init(void)
 {
+	persp = true;
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);	//background color
 }
 
@@ -52,9 +54,18 @@ void keyboard(unsigned char key, int x, int y)
 //Keyboard handler for special keys (like arrow keys and function keys)
 void special_keys(int a_keys, int x, int y)
 {
-	/*switch (a_keys)
+	switch (a_keys)
 	{
-	}*/
+	case GLUT_KEY_F2:
+		persp=!persp;
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		if(persp) gluPerspective(45, 800.0f/600.0f, 0.1, 10000.0);
+		else glOrtho(-5.0f, 5.0f, -5.0f, 5.0f, -100.0f, 100.0f);
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+		break;
+	}
 }
 
 void mouse(int button,int status,int x, int y){
