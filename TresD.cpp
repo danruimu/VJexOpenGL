@@ -10,11 +10,14 @@
 
 Scene scene;
 bool persp;
+bool zbuf;
+bool ilu;
 
 //OpenGL initializations
 void init(void)
 {
 	persp = true;
+	zbuf = false;
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);	//background color
 	scene.buildCube();
 }
@@ -22,7 +25,7 @@ void init(void)
 //Rendering
 void render(void)   
 {
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT |GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
 
 	scene.render();
@@ -58,15 +61,32 @@ void special_keys(int a_keys, int x, int y)
 {
 	switch (a_keys)
 	{
-	case GLUT_KEY_F2:
-		persp=!persp;
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		if(persp) gluPerspective(45, 800.0f/600.0f, 0.1, 10000.0);
-		else glOrtho(-5.0f, 5.0f, -5.0f, 5.0f, -100.0f, 100.0f);
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
-		break;
+		case GLUT_KEY_F2:	persp=!persp;
+							glMatrixMode(GL_PROJECTION);
+							glLoadIdentity();
+							if(persp) gluPerspective(45, 800.0f/600.0f, 0.1, 10000.0);
+							else glOrtho(-5.0f, 5.0f, -5.0f, 5.0f, -100.0f, 100.0f);
+							glMatrixMode(GL_MODELVIEW);
+							glLoadIdentity();
+							break;
+		
+		case GLUT_KEY_F3:	glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
+							break;
+
+		case GLUT_KEY_F4:	glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
+							break;
+
+		case GLUT_KEY_F5:	glPolygonMode(GL_FRONT_AND_BACK,GL_POINT);
+							break;
+
+		case GLUT_KEY_F6:	zbuf = !zbuf;
+							if(zbuf) {
+								glEnable(GL_DEPTH_TEST);
+								glEnable(GL_CULL_FACE);
+							} else {
+								glDisable(GL_DEPTH_TEST);
+								glDisable(GL_CULL_FACE);
+							}
 	}
 }
 
