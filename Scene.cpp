@@ -4,7 +4,7 @@
 
 Scene::Scene(void)
 {
-	//nothing to do here
+	alfa = 0.1;
 }
 
 
@@ -78,7 +78,13 @@ void Scene::render(void)
 		glColor3f(1.0f, 1.0f, 0.0f);
 		glVertex3f(-2.0f, -3.5f, 0.0f);
 		glVertex3f(4.0f, -3.5f, 0.0f);
+
+		glVertex3f(4.0f, -3.5f, 0.0f);
 		glVertex3f(4.0f, 3.5f, 0.0f);
+
+		glVertex3f(4.0f, 3.5f, 0.0f);
+		glVertex3f(-2.0f, 3.5f, 0.0f);
+
 		glVertex3f(-2.0f, 3.5f, 0.0f);
 		glVertex3f(-2.0f, -3.5f, 0.0f);
 	glEnd();

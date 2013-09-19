@@ -13,7 +13,7 @@ Scene scene;
 //OpenGL initializations
 void init(void)
 {
-	glClearColor(0.0f, 0.5f, 0.0f, 0.0f);	//background color
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);	//background color
 }
 
 //Rendering
