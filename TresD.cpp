@@ -16,6 +16,7 @@ void init(void)
 {
 	persp = true;
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);	//background color
+	scene.buildCube();
 }
 
 //Rendering
@@ -23,6 +24,7 @@ void render(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 	glLoadIdentity();
+
 	scene.render();
 
     glutSwapBuffers();					//Swap makes rendering visible

@@ -1,5 +1,6 @@
 #include "Scene.h"
-#include "gl/glut.h"
+#include <gl/GLaux.h>
+#include <gl/glut.h>
 
 
 Scene::Scene(void)
@@ -15,99 +16,77 @@ Scene::~Scene(void)
 
 void Scene::render(void)
 {
-	glTranslatef(-1.0f,0.0f,-10.0f);
-
-	//glColor3f(1.0f, 1.0f, 0.0f);
-
-	//3 base triangles
+	glTranslatef(0.0f,0.0f,-10.0f);
+	
+	glColor3f(1.0f,0.0f,0.0f);
 	glPushMatrix();
-		glRotatef(alfa,0,0,1);
-	glBegin(GL_TRIANGLES);
-		glColor3f(1.0f, 0.0f, 0.0f);	//red
-		glVertex3f(3.0f, -1.0f, 0.0f);
-		glColor3f(0.0f, 1.0f, 0.0f);	//green
-		glVertex3f(2.0f, -3.0f, 0.0f);
-		glColor3f(0.0f, 0.0f, 1.0f);	//blue
-		glVertex3f(4.0f, -3.0f, 0.0f);
-	glEnd();
+		glTranslatef(2.0f,0.0f,0.0f);
+		glCallList(CUBE);
 	glPopMatrix();
 
+	glColor3f(0.0f,1.0f,0.0f);
 	glPushMatrix();
-		glRotatef(alfa,0,0,-1);
-	glBegin(GL_TRIANGLES);
-		glColor3f(0.0f, 0.0f, 0.0f);	//black
-		glVertex3f(1.0f, -1.0f, 0.0f);
-		glColor3f(1.0f, 1.0f, 1.0f);	//white
-		glVertex3f(0.0f, -3.0f, 0.0f);
-		glColor3f(1.0f, 1.0f, 1.0f);	//white
-		glVertex3f(2.0f, -3.0f, 0.0f);
-	glEnd();
+		glTranslatef(-2.0f,0.0f,0.0f);
+		glCallList(CUBE);
 	glPopMatrix();
 
+	glColor3f(0.0f,0.0f,1.0f);
 	glPushMatrix();
-	glRotatef(alfa,0,0,1);
-	glBegin(GL_TRIANGLES);
-		glColor3f(1.0f, 0.0f, 0.0f);	//red
-		glVertex3f(-1.0f, -1.0f, 0.0f);
-		glColor3f(0.0f, 0.0f, 1.0f);	//blue
-		glVertex3f(-2.0f, -3.0f, 0.0f);
-		glColor3f(0.0f, 1.0f, 0.0f);	//green
-		glVertex3f(0.0f, -3.0f, 0.0f);
-	glEnd();
+		glTranslatef(0.0f,2.5f,0.0f);
+		glRotatef(alfa,0.0f,1.0f,0.0f);
+		glCallList(CUBE);
 	glPopMatrix();
 
+	glColor3f(1.0f,1.0f,0.0f);
 	glPushMatrix();
-	//2 middle triangle
-		glRotatef(alfa,0,1,0);
-	glBegin(GL_TRIANGLES);
-		glColor3f(0.5f, 0.0f, 0.0f);	//dark red
-		glVertex3f(0.0f, 1.0f, 0.0f);
-		glColor3f(0.0f, 0.5f, 0.0f);	//dark green
-		glVertex3f(-1.0f, -1.0f, 0.0f);
-		glColor3f(0.0f, 0.0f, 0.5f);	//dark blue
-		glVertex3f(1.0f, -1.0f, 0.0f);
-	glEnd();
+		glTranslatef(0.0f,-2.0f,0.0f);
+		glScalef(1.5f,0.5f,1.0f);
+		glCallList(CUBE);
 	glPopMatrix();
 
-	glPushMatrix();
-		glRotatef(alfa,0,-1,0);
-	glBegin(GL_TRIANGLES);
-		glColor3f(0.5f, 0.0f, 0.0f);	//dark red
-		glVertex3f(2.0f, 1.0f, 0.0f);
-		glColor3f(0.0f, 0.0f, 0.5f);	//dark blue
-		glVertex3f(1.0f, -1.0f, 0.0f);
-		glColor3f(0.0f, 0.5f, 0.0f);	//dark green
-		glVertex3f(3.0f, -1.0f, 0.0f);
-	glEnd();
-	glPopMatrix();
-
-	glPushMatrix();
-	//1 top triangle
-		glRotatef(alfa,1,-1,1);
-	glBegin(GL_TRIANGLES);
-		glColor3f(1.0f, 1.0f, 0.0f);	//yellow
-		glVertex3f(1.0f, 3.0f, 0.0f);
-		glColor3f(1.0f, 0.0f, 1.0f);	//magenta
-		glVertex3f(0.0f, 1.0f, 0.0f);
-		glColor3f(0.0f, 1.0f, 1.0f);	//cyan
-		glVertex3f(2.0f, 1.0f, 0.0f);
-	glEnd();
-	glPopMatrix();
-
-	//1 yellow square
-	glBegin(GL_LINES);
-		glColor3f(1.0f, 1.0f, 0.0f);
-		glVertex3f(-2.0f, -3.5f, 0.0f);
-		glVertex3f(4.0f, -3.5f, 0.0f);
-
-		glVertex3f(4.0f, -3.5f, 0.0f);
-		glVertex3f(4.0f, 3.5f, 0.0f);
-
-		glVertex3f(4.0f, 3.5f, 0.0f);
-		glVertex3f(-2.0f, 3.5f, 0.0f);
-
-		glVertex3f(-2.0f, 3.5f, 0.0f);
-		glVertex3f(-2.0f, -3.5f, 0.0f);
-	glEnd();
 	alfa+=0.02;
+}
+
+void Scene::buildCube(void)
+{
+	glNewList(CUBE, GL_COMPILE);
+		glBegin(GL_QUADS);
+			//Top face
+			glNormal3f(0,1,0);
+			glVertex3f(-1,1,-1);
+			glVertex3f(-1,1,1);
+			glVertex3f(1,1,1);
+			glVertex3f(1,1,-1);
+			// Bottom Face
+			glNormal3f( 0.0f,-1.0f, 0.0f);
+			glVertex3f(-1.0f, -1.0f, -1.0f);
+			glVertex3f( 1.0f, -1.0f, -1.0f);
+			glVertex3f( 1.0f, -1.0f,  1.0f);
+			glVertex3f(-1.0f, -1.0f,  1.0f);
+			// Front Face
+			glNormal3f( 0.0f, 0.0f, 1.0f);
+			glVertex3f(-1.0f, -1.0f,  1.0f);
+			glVertex3f( 1.0f, -1.0f,  1.0f);
+			glVertex3f( 1.0f,  1.0f,  1.0f);
+			glVertex3f(-1.0f,  1.0f,  1.0f);
+			// Back Face
+			glNormal3f( 0.0f, 0.0f,-1.0f);
+			glVertex3f(-1.0f, -1.0f, -1.0f);
+			glVertex3f(-1.0f,  1.0f, -1.0f);
+			glVertex3f( 1.0f,  1.0f, -1.0f);
+			glVertex3f( 1.0f, -1.0f, -1.0f);
+			// Right face
+			glNormal3f( 1.0f, 0.0f, 0.0f);
+			glVertex3f( 1.0f, -1.0f, -1.0f);
+			glVertex3f( 1.0f,  1.0f, -1.0f);
+			glVertex3f( 1.0f,  1.0f,  1.0f);
+			glVertex3f( 1.0f, -1.0f,  1.0f);
+			// Left Face
+			glNormal3f(-1.0f, 0.0f, 0.0f);
+			glVertex3f(-1.0f, -1.0f, -1.0f);
+			glVertex3f(-1.0f, -1.0f,  1.0f);
+			glVertex3f(-1.0f,  1.0f,  1.0f);
+			glVertex3f(-1.0f,  1.0f, -1.0f);
+		glEnd();
+	glEndList();
 }
